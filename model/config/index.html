@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./js/require.js"></script>
+</head>
+<body>
+	<div id="d">哈哈哈</div>
+	<script>
+		requirejs.config({
+			baseUrl: './',
+			paths: {
+				'a': 'module/module_a',
+				'b': 'module/module_b',
+				'Person': 'tools/person',
+				'jq': 'js/jquery'
+			},
+			shim: {
+				'Person': {
+					'exports': 'p',
+					'deps': ['jq']
+				}
+			}
+		});
+		require(['a', 'b', 'Person'], function (args1, args2, args3) {
+			console.log(args1);
+			console.log(args2);
+			args3.name = 'ww';
+			args3.age = 30;
+			args3.sayHi();
+		})
+	</script>
+</body>
+</html>
